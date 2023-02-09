@@ -43,6 +43,11 @@ public class PostController {
         return null;
     }
 
+    @GetMapping("/flop")
+    public ResponsePage<PostDto> findFlopPost() {
+        return null;
+    }
+
     @GetMapping("/random")
     public ResponsePage<PostDto> findRandomPost() {
         return null;
