@@ -3,6 +3,8 @@ package com.kameleoon.userpost.controller;
 import com.kameleoon.userpost.model.PostDto;
 import com.kameleoon.userpost.model.ResponsePage;
 import com.kameleoon.userpost.model.ResponseStatus;
+import com.kameleoon.userpost.service.PostPageService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,14 +16,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/v1/post")
+@RequiredArgsConstructor
 public class PostController {
-
+    private final PostPageService postPageService;
     @GetMapping
     public ResponsePage<PostDto> findByPage(int page,
                                             int size,
                                             String filter,
                                             String direction) {
-        return null;
+        return postPageService.findByPage(page,size,filter,direction);
     }
 
     @GetMapping("/{login}")
@@ -30,61 +33,61 @@ public class PostController {
                                             int size,
                                             String filter,
                                             String direction) {
-        return null;
+        return postPageService.findByUser(login,page,size,filter,direction);
     }
 
     @GetMapping("/{login}/last")
     public ResponsePage<PostDto> findByUserLast(@PathVariable String login) {
-        return null;
+        return postPageService.findByUserLast(login);
     }
 
     @GetMapping("/top")
     public ResponsePage<PostDto> findTopPost() {
-        return null;
+        return postPageService.findTopPost();
     }
 
     @GetMapping("/flop")
     public ResponsePage<PostDto> findFlopPost() {
-        return null;
+        return postPageService.findFlopPost();
     }
 
     @GetMapping("/random")
     public ResponsePage<PostDto> findRandomPost() {
-        return null;
+        return postPageService.findRandomPost();
     }
 
     @PostMapping
     public ResponseStatus savePost(@RequestBody PostDto post) {
-        return null;
+        return postPageService.savePost(post);
     }
 
     @PutMapping("/{id}")
     public ResponseStatus updatePost(@PathVariable long id, @RequestBody PostDto post) {
-        return null;
+        return postPageService.updatePost(id,post);
     }
 
     @DeleteMapping("/{id}")
     public ResponseStatus deletePost(@PathVariable long id, @RequestBody PostDto post) {
-        return null;
+        return postPageService.deletePost(id,post);
     }
 
     @PostMapping("/{id}/like")
-    public ResponseStatus likePost(@PathVariable String id) {
-        return null;
+    public ResponseStatus likePost(@PathVariable long id) {
+        return postPageService.likePost(id);
     }
 
     @PostMapping("/{id}/dislike")
-    public ResponseStatus dislikePost(@PathVariable String id) {
-        return null;
+    public ResponseStatus dislikePost(@PathVariable long id) {
+        return postPageService.dislikePost(id);
     }
 
     @DeleteMapping("/{id}/like")
-    public ResponseStatus deleteLike(@PathVariable String id) {
-        return null;
+    public ResponseStatus deleteLike(@PathVariable long id) {
+        return postPageService.deleteLikePost(id);
     }
 
     @DeleteMapping("/{id}/dislike")
-    public ResponseStatus deleteDislike(@PathVariable String id) {
-        return null;
+    public ResponseStatus deleteDislike(@PathVariable long id) {
+        return postPageService.deleteDislikePost(id);
     }
 }

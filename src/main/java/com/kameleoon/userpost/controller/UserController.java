@@ -16,7 +16,7 @@ public class UserController {
         return null;
     }
     @PostMapping("/auth")
-    public ResponseStatus authentication(@RequestBody UserDto user) {
+    public UserDto authentication(@RequestBody UserDto user) {
         return null;
     }
 }
