@@ -2,6 +2,7 @@ package com.kameleoon.userpost.service.impl;
 
 import com.kameleoon.userpost.entity.PostDislike;
 import com.kameleoon.userpost.entity.PostLike;
+import com.kameleoon.userpost.exception.ServiceException;
 import com.kameleoon.userpost.model.PostDto;
 import com.kameleoon.userpost.service.PostService;
 import com.kameleoon.userpost.service.PostVoteService;
@@ -62,22 +63,22 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void likePost(long id) {
-
+    public void likePost(long id) throws ServiceException {
+        postLikeService.saveVote(null,null);
     }
 
     @Override
-    public void dislikePost(long id) {
-
+    public void dislikePost(long id) throws ServiceException {
+        postDislikeService.saveVote(null,null);
     }
 
     @Override
-    public void deleteLikePost(long id) {
-
+    public void deleteLikePost(long id) throws ServiceException {
+        postLikeService.deleteVote(null,null);
     }
 
     @Override
-    public void deleteDislikePost(long id) {
-
+    public void deleteDislikePost(long id) throws ServiceException {
+        postDislikeService.deleteVote(null,null);
     }
 }

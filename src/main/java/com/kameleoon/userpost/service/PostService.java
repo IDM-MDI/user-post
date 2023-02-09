@@ -1,5 +1,6 @@
 package com.kameleoon.userpost.service;
 
+import com.kameleoon.userpost.exception.ServiceException;
 import com.kameleoon.userpost.model.PostDto;
 
 import java.util.List;
@@ -28,8 +29,8 @@ public interface PostService {
     void updatePost(long id, PostDto post);
 
     void deletePost(long id, PostDto post);
-    void likePost(long id);
-    void dislikePost(long id);
-    void deleteLikePost(long id);
-    void deleteDislikePost(long id);
+    void likePost(long id) throws ServiceException;
+    void dislikePost(long id) throws ServiceException;
+    void deleteLikePost(long id) throws ServiceException;
+    void deleteDislikePost(long id) throws ServiceException;
 }
