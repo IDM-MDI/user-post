@@ -30,6 +30,6 @@ public class Post {
     private User user;
 
     @CreatedDate
-    @Column(name = "posted_date")
+    @Column(name = "postedDate")
     private LocalDateTime postedDate;
 }

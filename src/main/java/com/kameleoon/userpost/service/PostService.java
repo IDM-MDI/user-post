@@ -1,11 +1,14 @@
 package com.kameleoon.userpost.service;
 
+import com.kameleoon.userpost.entity.Post;
 import com.kameleoon.userpost.exception.ServiceException;
 import com.kameleoon.userpost.model.PostDto;
+import com.kameleoon.userpost.model.UserDto;
 
 import java.util.List;
 
 public interface PostService {
+    Post findByID(long id) throws ServiceException;
     List<PostDto> findByPage(int page,
                              int size,
                              String filter,
@@ -28,9 +31,9 @@ public interface PostService {
 
     void updatePost(long id, PostDto post);
 
-    void deletePost(long id, PostDto post);
-    void likePost(long id) throws ServiceException;
-    void dislikePost(long id) throws ServiceException;
-    void deleteLikePost(long id) throws ServiceException;
-    void deleteDislikePost(long id) throws ServiceException;
+    void deletePost(long id, UserDto user) throws ServiceException;
+    void likePost(long id, UserDto user) throws ServiceException;
+    void dislikePost(long id, UserDto user) throws ServiceException;
+    void deleteLikePost(long id, UserDto user) throws ServiceException;
+    void deleteDislikePost(long id, UserDto user) throws ServiceException;
 }
