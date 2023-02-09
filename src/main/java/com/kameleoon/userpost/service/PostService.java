@@ -11,16 +11,16 @@ public interface PostService {
                              String filter,
                              String direction);
 
-    PostDto findByUser(String login,
-                                     int page,
-                                     int size,
-                                     String filter,
-                                     String direction);
-    PostDto findByUserLast(String login);
+    List<PostDto> findByUser(String login,
+                             int page,
+                             int size,
+                             String filter,
+                             String direction);
+    List<PostDto> findByUserLast(String login);
 
-    PostDto findTopPost();
+    List<PostDto> findTopPost();
 
-    PostDto findFlopPost();
+    List<PostDto> findFlopPost();
 
     PostDto findRandomPost();
 
