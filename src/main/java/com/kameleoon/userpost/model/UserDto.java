@@ -1,4 +1,4 @@
-package com.kameleoon.userpost.dto;
+package com.kameleoon.userpost.model;
 
 import lombok.Data;
 
