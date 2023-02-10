@@ -9,8 +9,11 @@ import com.kameleoon.userpost.service.PostVoteService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@EnableTransactionManagement(proxyTargetClass = true)
 @RequiredArgsConstructor
 @Slf4j
 public class PostLikeService implements PostVoteService<PostLike> {
@@ -26,6 +29,7 @@ public class PostLikeService implements PostVoteService<PostLike> {
     }
 
     @Override
+    @Transactional
     public void saveVote(User user, Post post) throws ServiceException {
         if(isVoteExist(user.getLogin())) {
             log.error("");

@@ -26,11 +26,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto saveUser(UserDto user) {
-        return mapper.map(repository.save(mapper.map(user, User.class)), UserDto.class);
-    }
-
-    @Override
-    public UserDto authenticate(UserDto user) {
-        return null;
+        if(repository.existsUserByLogin(user.getLogin())) {
+            throw new ServiceException("123");                  //TODO: FINISH EXCEPTION
+        }
+        User userEntity = mapper.map(user, User.class);
+        User savedEntity = repository.save(userEntity);
+        return mapper.map(savedEntity, UserDto.class);
     }
 }

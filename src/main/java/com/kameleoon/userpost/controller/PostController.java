@@ -1,5 +1,6 @@
 package com.kameleoon.userpost.controller;
 
+import com.kameleoon.userpost.exception.ServiceException;
 import com.kameleoon.userpost.model.PostDto;
 import com.kameleoon.userpost.model.ResponsePage;
 import com.kameleoon.userpost.model.ResponseStatus;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -20,19 +22,19 @@ import org.springframework.web.bind.annotation.RestController;
 public class PostController {
     private final PostPageService postPageService;
     @GetMapping
-    public ResponsePage<PostDto> findByPage(int page,
-                                            int size,
-                                            String filter,
-                                            String direction) {
+    public ResponsePage<PostDto> findByPage(@RequestParam(defaultValue = "0") int page,
+                                            @RequestParam(defaultValue = "5") int size,
+                                            @RequestParam(defaultValue = "id") String filter,
+                                            @RequestParam(defaultValue = "asc") String direction) {
         return postPageService.findByPage(page,size,filter,direction);
     }
 
     @GetMapping("/{login}")
     public ResponsePage<PostDto> findByUser(@PathVariable String login,
-                                            int page,
-                                            int size,
-                                            String filter,
-                                            String direction) {
+                                            @RequestParam(defaultValue = "0") int page,
+                                            @RequestParam(defaultValue = "5") int size,
+                                            @RequestParam(defaultValue = "id") String filter,
+                                            @RequestParam(defaultValue = "asc") String direction) {
         return postPageService.findByUser(login,page,size,filter,direction);
     }
 
@@ -56,38 +58,46 @@ public class PostController {
         return postPageService.findRandomPost();
     }
 
-    @PostMapping
-    public ResponseStatus savePost(@RequestBody PostDto post) {
-        return postPageService.savePost(post);
+    @PostMapping("/{login}")
+    public ResponseStatus savePost(@PathVariable String login,
+                                   @RequestBody PostDto post) {
+        return postPageService.savePost(login, post);
     }
 
-    @PutMapping("/{id}")
-    public ResponseStatus updatePost(@PathVariable long id, @RequestBody PostDto post) {
-        return postPageService.updatePost(id,post);
+    @PutMapping("/{login}/{id}")
+    public ResponseStatus updatePost(@PathVariable String login,
+                                     @PathVariable long id,
+                                     @RequestBody PostDto post) throws ServiceException {
+        return postPageService.updatePost(login,id,post);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseStatus deletePost(@PathVariable long id, @RequestBody PostDto post) {
-        return postPageService.deletePost(id,post);
+    @DeleteMapping("/{login}/{id}")
+    public ResponseStatus deletePost(@PathVariable String login,
+                                     @PathVariable long id) throws ServiceException {
+        return postPageService.deletePost(login,id);
     }
 
-    @PostMapping("/{id}/like")
-    public ResponseStatus likePost(@PathVariable long id) {
-        return postPageService.likePost(id);
+    @PostMapping("/{login}/{id}/like")
+    public ResponseStatus likePost(@PathVariable String login,
+                                   @PathVariable long id) throws ServiceException {
+        return postPageService.likePost(login,id);
     }
 
-    @PostMapping("/{id}/dislike")
-    public ResponseStatus dislikePost(@PathVariable long id) {
-        return postPageService.dislikePost(id);
+    @PostMapping("/{login}/{id}/dislike")
+    public ResponseStatus dislikePost(@PathVariable String login,
+                                      @PathVariable long id) throws ServiceException {
+        return postPageService.dislikePost(login,id);
     }
 
-    @DeleteMapping("/{id}/like")
-    public ResponseStatus deleteLike(@PathVariable long id) {
-        return postPageService.deleteLikePost(id);
+    @DeleteMapping("/{login}/{id}/like")
+    public ResponseStatus deleteLike(@PathVariable String login,
+                                     @PathVariable long id) throws ServiceException {
+        return postPageService.deleteLikePost(login,id);
     }
 
-    @DeleteMapping("/{id}/dislike")
-    public ResponseStatus deleteDislike(@PathVariable long id) {
-        return postPageService.deleteDislikePost(id);
+    @DeleteMapping("/{login}/{id}/dislike")
+    public ResponseStatus deleteDislike(@PathVariable String login,
+                                        @PathVariable long id) throws ServiceException {
+        return postPageService.deleteDislikePost(login,id);
     }
 }

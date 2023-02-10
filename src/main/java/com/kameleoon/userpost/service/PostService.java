@@ -3,7 +3,6 @@ package com.kameleoon.userpost.service;
 import com.kameleoon.userpost.entity.Post;
 import com.kameleoon.userpost.exception.ServiceException;
 import com.kameleoon.userpost.model.PostDto;
-import com.kameleoon.userpost.model.UserDto;
 
 import java.util.List;
 
@@ -27,13 +26,13 @@ public interface PostService {
 
     PostDto findRandomPost();
 
-    void savePost(PostDto post);
+    void savePost(String login, PostDto post);
 
-    void updatePost(long id, PostDto post);
+    void updatePost(String login, long id, PostDto post) throws ServiceException;
 
-    void deletePost(long id, UserDto user) throws ServiceException;
-    void likePost(long id, UserDto user) throws ServiceException;
-    void dislikePost(long id, UserDto user) throws ServiceException;
-    void deleteLikePost(long id, UserDto user) throws ServiceException;
-    void deleteDislikePost(long id, UserDto user) throws ServiceException;
+    void deletePost(String login, long id) throws ServiceException;
+    void likePost(String id, long user) throws ServiceException;
+    void dislikePost(String id, long user) throws ServiceException;
+    void deleteLikePost(String id, long user) throws ServiceException;
+    void deleteDislikePost(String id, long user) throws ServiceException;
 }

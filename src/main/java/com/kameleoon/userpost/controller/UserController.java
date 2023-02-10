@@ -17,8 +17,4 @@ public class UserController {
     public UserDto registration(@RequestBody UserDto user) {
         return service.saveUser(user);
     }
-    @PostMapping("/auth")
-    public UserDto authentication(@RequestBody UserDto user) {
-        return service.authenticate(user);
-    }
 }

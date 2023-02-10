@@ -20,4 +20,10 @@ public class ResponseStatusHandler {
     public static ResponseStatus findByPageStatus() {
         return new ResponseStatus();
     }
+    public static ResponseStatus likeStatus() {
+        return new ResponseStatus();
+    }
+    public static ResponseStatus dislikeStatus() {
+        return new ResponseStatus();
+    }
 }
