@@ -20,15 +20,12 @@ import java.time.LocalDateTime;
 @Data
 public class Post {
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "text")
     private String text;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id")
     private User user;
-
     @CreatedDate
     @Column(name = "postedDate")
     private LocalDateTime postedDate;

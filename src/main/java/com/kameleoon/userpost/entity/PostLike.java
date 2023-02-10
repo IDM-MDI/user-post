@@ -18,7 +18,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PostLike {
     @Id
-    @Column(name = "id")
     @GeneratedValue
     private Long id;
     @OneToOne(fetch = FetchType.EAGER)
